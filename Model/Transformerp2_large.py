@@ -233,16 +233,6 @@ test_y = xr.open_dataset("test_y").to_array().to_numpy()[0]
 valid_x = xr.open_dataset("valid_x").to_array().to_numpy()[0]
 valid_y = xr.open_dataset("valid_y").to_array().to_numpy()[0]
 
-
-
-import csv
-import numpy as np
- 
-with open('train_x.csv', 'r') as f:
-    data = list(csv.reader(f, delimiter=";"))
- 
-np.array(data.to_array()).shape
-
 @tf.function
 def preprocess(frames: tf.Tensor, label: tf.Tensor):
     """Preprocess the frames tensors and parse the labels."""
