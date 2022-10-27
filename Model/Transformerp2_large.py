@@ -226,54 +226,6 @@ model = create_vivit_classifier()
 
 model.summary()
 
-train_x = []
-train_y = []
-valid_x = []
-valid_y = []
-test_x = []
-test_y = []
-
-for i in range(950):
-    data = xr.open_dataset(fr"C:/Users/Leander/Skole/H2022/Datasets/64x64x32/64x64x32{i}.nc")
-    train_x.append(data["n"])
-    train_y.append(data["blob_labels"])
-
-for i in range(25):
-    data = xr.open_dataset(fr"C:/Users/Leander/Skole/H2022/Datasets/64x64x32/64x64x32{i+950}.nc")
-    valid_x.append(data["n"])
-    valid_y.append(data["blob_labels"])
-
-for i in range(25):
-    data = xr.open_dataset(fr"C:/Users/Leander/Skole/H2022/Datasets/64x64x32/64x64x32{i+975}.nc")
-    test_x.append(data["n"])
-    test_y.append(data["blob_labels"])
-
-train_x = np.moveaxis(np.array(train_x).reshape(950,64,32,64,1),3,1) 
-train_x = train_x/train_x.max()
-train_y = np.moveaxis(np.array(train_y).reshape(950,64,32,64,1),3,1)
-valid_x = np.moveaxis(np.array(valid_x).reshape(25,64,32,64,1),3,1) 
-valid_x = valid_x/valid_x.max()
-valid_y = np.moveaxis(np.array(valid_y).reshape(25,64,32,64,1),3,1)
-test_x = np.moveaxis(np.array(test_x).reshape(25,64,32,64,1),3,1) 
-test_x = test_x/test_x.max()
-test_y = np.moveaxis(np.array(test_y).reshape(25,64,32,64,1),3,1)
-
-import pandas as pd
-
-train_x = xr.DataArray(train_x)
-train_x.to_netcdf("train_x")
-train_y = xr.DataArray(train_y)
-train_y.to_netcdf("train_y")
-valid_x = xr.DataArray(valid_x)
-valid_x.to_netcdf("valid_x")
-valid_y = xr.DataArray(valid_y)
-valid_y.to_netcdf("valid_y")
-test_x = xr.DataArray(test_x)
-test_x.to_netcdf("test_x")
-test_y = xr.DataArray(test_y)
-test_y.to_netcdf("test_y")
-
-
 train_x = xr.open_dataset("train_x").to_array().to_numpy()[0]
 train_y = xr.open_dataset("train_y").to_array().to_numpy()[0]
 test_x = xr.open_dataset("test_x").to_array().to_numpy()[0]
