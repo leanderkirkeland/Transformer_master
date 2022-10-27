@@ -290,7 +290,7 @@ model.compile(
     )
 
 
-log_dir = fr"C:/Users/Leander/Skole/H2022/logs/fit/64x64x32_1epochtest" 
+log_dir = "/logs/fit/64x64x32_1epochtest" 
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
 
 _ = model.fit(trainloader, epochs=1, validation_data=validloader, callbacks=[tensorboard_callback])
