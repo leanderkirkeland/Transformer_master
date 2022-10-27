@@ -295,8 +295,4 @@ tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram
 
 _ = model.fit(trainloader, epochs=1, validation_data=validloader, callbacks=[tensorboard_callback])
 
-model.save(r"C:\Users\Leander\Skole\H2022\Transformer_64x64x32")
-
-from google.colab import drive
-drive.mount('/gdrive')
-
+model.save("Transformer_64x64x32")
